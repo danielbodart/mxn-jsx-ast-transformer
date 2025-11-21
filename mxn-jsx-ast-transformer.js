@@ -136,6 +136,7 @@ var MXNJSXConv = function(tree, options)
                     case "CallExpression":
                     case "ArrowFunctionExpression":
                     case "Identifier":
+                    case "TemplateLiteral":
                         this.replace(node.expression);
                         return;
 
