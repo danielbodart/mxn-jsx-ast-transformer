@@ -188,6 +188,7 @@ var MXNJSXConv = function(tree, options)
                 }
 
                 let callNode = callFunction(options.factory, args);
+                if (node.range) callNode.range = node.range;
                 this.replace(callNode);
             }
         }
