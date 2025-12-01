@@ -4,10 +4,18 @@
 // ESTree Walker
 const walk = require("estree-walker").walk;
 
+const makeCallee = function (name) {
+    const parts = name.split('.');
+    return parts.slice(1).reduce(
+        (object, name) => ({ type: "MemberExpression", object, property: { type: "Identifier", name }, computed: false }),
+        { type: "Identifier", name: parts[0] }
+    );
+};
+
 const callFunction = function (name, args) {
     return {
         type: "CallExpression",
-        callee: { type: "Identifier", name: name },
+        callee: makeCallee(name),
         arguments: args ? args : []
     };
 };
